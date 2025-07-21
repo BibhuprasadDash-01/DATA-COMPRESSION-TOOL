@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Function to compress text using RLE
+void compressFile(const char *input, const char *output) {
+    FILE *in = fopen(input, "r");
+    FILE *out = fopen(output, "w");
+    if (!in || !out) {
+        printf("Error opening files.\n");
+        return;
+    }
+
+    char currentChar, prevChar;
+    int count = 1;
+    prevChar = fgetc(in);
+
+    while ((currentChar = fgetc(in)) != EOF) {
+        if (currentChar == prevChar) {
+            count++;
+        } else {
+            fprintf(out, "%d%c", count, prevChar);
+            count = 1;
+        }
+        prevChar = currentChar;
+    }
+    // Write the last sequence
+    if (feof(in)) {
+        fprintf(out, "%d%c", count, prevChar);
+    }
+
+    fclose(in);
+    fclose(out);
+    printf("Compression complete. Output saved to '%s'\n", output);
+}
+
+// Function to decompress RLE encoded text
+void decompressFile(const char *input, const char *output) {
+    FILE *in = fopen(input, "r");
+    FILE *out = fopen(output, "w");
+    if (!in || !out) {
+        printf("Error opening files.\n");
+        return;
+    }
+
+    int count;
+    char ch;
+    while (fscanf(in, "%d%c", &count, &ch) == 2) {
+        for (int i = 0; i < count; i++) {
+            fputc(ch, out);
+        }
+    }
+
+    fclose(in);
+    fclose(out);
+    printf("Decompression complete. Output saved to '%s'\n", output);
+}
+
+// Main menu
+int main() {
+    int choice;
+    char inputFile[100], outputFile[100];
+
+    printf("Text Compression & Decompression Tool\n");
+    printf("1. Compress\n");
+    printf("2. Decompress\n");
+    printf("Enter choice: ");
+    scanf("%d", &choice);
+
+    if (choice == 1) {
+        printf("Enter input file name (e.g., original.txt): ");
+        scanf("%s", inputFile);
+        printf("Enter output (compressed) file name: ");
+        scanf("%s", outputFile);
+        compressFile(inputFile, outputFile);
+    } else if (choice == 2) {
+        printf("Enter input (compressed) file name: ");
+        scanf("%s", inputFile);
+        printf("Enter output (decompressed) file name: ");
+        scanf("%s", outputFile);
+        decompressFile(inputFile, outputFile);
+    } else {
+        printf("Invalid choice.\n");
+    }
+
+    return 0;
+}
