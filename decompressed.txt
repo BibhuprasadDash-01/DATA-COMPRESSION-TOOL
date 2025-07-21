@@ -1,0 +1,39 @@
+// Function to decompress text using RLE
+void decompressFile(const char *input, const char *output) {
+    FILE *in = fopen(input, "r");
+    FILE *out = fopen(output, "w");
+
+    if (!in || !out) {
+        printf("Error opening files.\n");
+        return;
+    }
+
+    char ch;
+    int count;
+
+    while ((ch = fgetc(in)) != EOF) {
+        if (isdigit(ch)) {
+            // Should not happen: skip or handle
+            continue;
+        }
+
+        // Read the count after character
+        fscanf(in, "%d", &count);
+
+        for (int i = 0; i < count; i++) {
+            fputc(ch, out);
+        }
+    }
+
+    fclose(in);
+    fclose(out);
+    printf("Decompression complete. Output saved to '%s'\n", output);
+}
+
+else if (choice == 2) {
+    printf("Enter input (compressed) file name: ");
+    scanf("%s", inputFile);
+    printf("Enter output (decompressed) file name: ");
+    scanf("%s", outputFile);
+    decompressFile(inputFile, outputFile);
+}
