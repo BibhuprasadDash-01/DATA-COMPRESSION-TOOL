@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void compressFile(const char *input, const char *output) {
+    FILE *in = fopen(input, "r");
+    FILE *out = fopen(output, "w");
+
+    if (!in || !out) {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    char curr, prev;
+    int count = 1;
+
+    prev = fgetc(in);
+    while ((curr = fgetc(in)) != EOF) {
+        if (curr == prev) {
+            count++;
+        } else {
+            fprintf(out, "%d%c", count, prev);
+            count = 1;
+        }
+        prev = curr;
+    }
+    fprintf(out, "%d%c", count, prev);  // write last set
+
+    fclose(in);
+    fclose(out);
+}
