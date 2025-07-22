@@ -16,6 +16,8 @@
 
 #OUTPUT:
 
+<img width="1920" height="500" alt="Image" src="https://github.com/user-attachments/assets/014da864-5bda-43b4-97ea-afbdf7c03502" />
+
 * DELIVERABLE: A TOOL THAT COMPRESSES AND DECOMPRESSES TEXT FILES.
   
   #OUTPUT:
