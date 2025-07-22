@@ -14,12 +14,12 @@
 *DESCRIPTION OF TASK-4*:- DATA COMPRESSION TOOL
 * WRITE A PROGRAM TO IMPLEMENT A BASIC DATA COMPRESSION ALGORITHM LIKE RUN-LENGTH ENCODING (RLE).
 
-#OUTPUT:
+*OUTPUT*:
 
 <img width="1920" height="500" alt="Image" src="https://github.com/user-attachments/assets/014da864-5bda-43b4-97ea-afbdf7c03502" />
 
 * DELIVERABLE: A TOOL THAT COMPRESSES AND DECOMPRESSES TEXT FILES.
   
-  #OUTPUT:
+  *OUTPUT*:
   
 <img width="1920" height="454" alt="Image" src="https://github.com/user-attachments/assets/b672fa60-ed35-46d1-a269-5f51bf176524" />
